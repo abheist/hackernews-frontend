@@ -3,6 +3,26 @@ import { AUTH_TOKEN } from '../constants';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 
+const SIGNUP_MUTATION = gql`
+	mutation SignupMutation(
+		$email: String!
+		$password: String!
+		$name: String!
+	) {
+		signup(email: $email, password: $password, name: $name) {
+			token
+		}
+	}
+`;
+
+const LOGIN_MUTATION = gql`
+	mutation LoginMutation($email: String!, $password: String!) {
+		login(email: $email, password: $password) {
+			token
+		}
+	}
+`;
+
 class Login extends Component {
 	state = {
 		login: true,
@@ -13,26 +33,6 @@ class Login extends Component {
 
 	render() {
 		const { login, email, password, name } = this.state;
-
-		const SIGNUP_MUTATION = gql`
-			mutation SignupMutation(
-				$email: String!
-				$password: String!
-				$name: String!
-			) {
-				signup(email: $email, password: $password, name: $name) {
-					token
-				}
-			}
-		`;
-
-		const LOGIN_MUTATION = gql`
-			mutation LoginMutation($email: String!, $password: String!) {
-				login(email: $email, password: $password) {
-					token
-				}
-			}
-		`;
 
 		return (
 			<div>
